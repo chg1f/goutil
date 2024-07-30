@@ -2,6 +2,25 @@ package goutil
 
 import "reflect"
 
+func Ptr[T any](v T) *T {
+	return &v
+}
+
+func Unptr[T any](v *T) T {
+	if v == nil {
+		var zero T
+		return zero
+	}
+	return *v
+}
+
+func Must[T any](value T, err error) T {
+	if err != nil {
+		panic(err)
+	}
+	return value
+}
+
 func First[T any](elems ...T) T {
 	if len(elems) == 0 {
 		panic("First: empty slice")
